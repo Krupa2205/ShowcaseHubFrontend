@@ -34,7 +34,7 @@ function Header() {
       {/* Navbar */}
       <nav className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-black bg-opacity-50 backdrop-blur-sm z-20">
         {/* Logo */}
-        <div className="text-white text-3xl font-bold">Syntax Squad</div>
+        <div className="text-white text-3xl font-bold cursor-pointer hover:text-blue-500">Syntax Squad</div>
 
         {/* Menu Icon and Sign In Button */}
         <div className="flex items-center space-x-4">

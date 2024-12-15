@@ -29,10 +29,27 @@ function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
-          We are the <span className='font-bold'>Syntax Squad👋🏻❤💻👾,</span>  dedicated to empowering developers and building futures. Our 
-          mission is to inspire creativity, foster innovation, and deliver impactful solutions in 
+          We are the <span className="font-bold">Syntax Squad👋🏻❤💻👾,</span> dedicated to empowering developers and building futures. Our
+          mission is to inspire creativity, foster innovation, and deliver impactful solutions in
           the world of technology. Join us as we journey towards a brighter, tech-driven tomorrow.
         </motion.p>
+
+        {/* WhatsApp Join Now Button */}
+        <div className="mt-8 flex justify-center">
+          <a
+            href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp Logo"
+              className="w-6 h-6 mr-2"
+            />
+            Join Now on WhatsApp
+          </a>
+        </div>
       </motion.div>
     </section>
   );

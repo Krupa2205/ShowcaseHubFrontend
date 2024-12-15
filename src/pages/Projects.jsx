@@ -14,20 +14,16 @@ const Projects = () => {
   });
   const [editingIndex, setEditingIndex] = useState(null);
 
-  // Load projects from localStorage on component mount
   useEffect(() => {
     try {
       const savedProjects = JSON.parse(localStorage.getItem('projects')) || [];
-      console.log("Loaded projects from localStorage:", savedProjects);  // Debugging line
       setProjects(savedProjects);
     } catch (error) {
       console.error('Error reading projects from localStorage:', error);
     }
   }, []);
 
-  // Save projects to localStorage whenever the projects array changes
   useEffect(() => {
-    console.log("Saving projects to localStorage:", projects);  // Debugging line
     localStorage.setItem('projects', JSON.stringify(projects));
   }, [projects]);
 
@@ -53,10 +49,9 @@ const Projects = () => {
     }
   };
 
-  const handleEditClick = (index) => {
-    setEditingIndex(index);
-    setNewProject(projects[index]);
-    setShowUploadCard(true);
+  const handleDelete = (index) => {
+    const updatedProjects = projects.filter((_, i) => i !== index);
+    setProjects(updatedProjects);
   };
 
   return (
@@ -173,14 +168,16 @@ const Projects = () => {
                     Live Project
                   </a>
                 )}
-                <button className="edit-button" onClick={() => handleEditClick(index)}>
-                  Edit
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(index)}
+                >
+                  Delete
                 </button>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import About from './pages/About';
 import Projects from './pages/Projects';
-import Upload from './pages/Upload';
 import { div } from 'framer-motion/client';
 import Achievements from './pages/Achievements';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
     <About />
     <Projects/>
     <Achievements/>
+    <Footer/>
     </div>
   );
 }
