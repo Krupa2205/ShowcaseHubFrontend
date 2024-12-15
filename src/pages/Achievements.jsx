@@ -85,7 +85,7 @@ const Achievements = () => {
           >
             +
           </button>
-          <p className="upload-text font-bold">Add Achievement</p>
+          <p className="upload-text font-bold">Add Achievements</p>
         </div>
 
         {showUploadCard && (

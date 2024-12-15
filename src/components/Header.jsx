@@ -107,7 +107,7 @@ function Header() {
         className="relative z-10 flex flex-col items-center space-y-6 mt-16"
       >
         <motion.img
-          src="src/assets/Logo.jpg"
+          src="/Logo.jpg"
           alt="Syntax Squad Logo"
           className="h-32 w-32 rounded-full shadow-lg"
           animate={{ rotate: [0, 360] }}
@@ -122,7 +122,7 @@ function Header() {
           Welcome to the <span className="text-blue-500">Syntax Squad</span>
         </motion.h1>
         <motion.p
-          className="text-lg sm:text-2xl text-white"
+          className="text-lg sm:text-2xl text-white font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
