@@ -22,7 +22,7 @@ function Header() {
 
   return (
     <header className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden">
-      {/* Background Video */}
+      
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/Bganimation.mp4"
@@ -45,7 +45,7 @@ function Header() {
             </button>
           )}
 
-          {/* Menu Icon */}
+          
           <button
             onClick={toggleMenu}
             className="text-white text-3xl focus:outline-none"

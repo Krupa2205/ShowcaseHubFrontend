@@ -43,7 +43,7 @@ function About() {
             className="flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              src="/Whatsapp.png"
               alt="WhatsApp Logo"
               className="w-6 h-6 mr-2"
             />
