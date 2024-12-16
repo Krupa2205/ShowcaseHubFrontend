@@ -21,7 +21,7 @@ function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          About Us🔥
+          About Us👋🏻
         </motion.h2>
         <motion.p
           className="text-lg sm:text-xl leading-relaxed text-center"
@@ -29,7 +29,7 @@ function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
-          We are the <span className="font-bold">Syntax Squad👋🏻❤💻👾,</span> dedicated to empowering developers and building futures. Our
+          We are the <span className="font-bold">Syntax Squad👋🏻❤💻,</span> dedicated to empowering developers and building futures. Our
           mission is to inspire creativity, foster innovation, and deliver impactful solutions in
           the world of technology. Join us as we journey towards a brighter, tech-driven tomorrow.
         </motion.p>

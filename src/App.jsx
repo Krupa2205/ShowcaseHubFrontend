@@ -6,6 +6,7 @@ import Projects from './pages/Projects';
 import { div } from 'framer-motion/client';
 import Achievements from './pages/Achievements';
 import Footer from './components/Footer';
+import TopBuilders from './pages/TopBuilders';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <About />
     <Projects/>
     <Achievements/>
+    <TopBuilders/>
     <Footer/>
     </div>
   );

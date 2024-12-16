@@ -71,7 +71,7 @@ const Achievements = () => {
     <section id="achievements" className="achievements-section">
       <div className="container">
         <div className="animated-title">
-          <h2 className="section-title">Achievements</h2>
+          <h2 className="section-title">Achievements🎉</h2>
         </div>
 
         <div className="upload-card">

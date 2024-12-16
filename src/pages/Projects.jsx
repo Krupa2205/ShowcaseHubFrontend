@@ -58,7 +58,7 @@ const Projects = () => {
     <section id="projects" className="projects-section">
       <div className="container">
         <div className="animated-title">
-          <h2 className="section-title">Welcome to the Project's Section</h2>
+          <h2 className="section-title">Welcome to the Project's Section💻</h2>
         </div>
 
         <div className="upload-card">
@@ -134,9 +134,9 @@ const Projects = () => {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="project-card">
-              <h3 className="project-title">{project.title}</h3>
+              <h3 className="project-title font-bold">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              <p className="project-username">Uploaded by: {project.username}</p>
+              <p className="project-username font-bold">Uploaded by: {project.username}</p>
               <div className="button-group">
                 {project.github && (
                   <a

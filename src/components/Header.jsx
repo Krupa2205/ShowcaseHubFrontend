@@ -66,30 +66,48 @@ function Header() {
         >
           <div className="flex flex-col items-start py-4 px-6 space-y-6 overflow-y-auto">
             {/* Menu Links */}
-            <button
+            <motion.button
               className="block text-lg hover:text-blue-500 transition-colors"
               onClick={() => scrollToSection("home")}
+              whileHover={{ scale: 1.1 }} // Add hover effect
+              transition={{ duration: 0.3 }}
             >
               Home
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className="block text-lg hover:text-purple-500 transition-colors"
               onClick={() => scrollToSection("about")}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
             >
               About Us
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className="block text-lg hover:text-yellow-300 transition-colors"
               onClick={() => scrollToSection("projects")}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
             >
               Projects
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className="block text-lg hover:text-red-400 transition-colors"
               onClick={() => scrollToSection("achievements")}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
             >
               Achievements
-            </button>
+            </motion.button>
+
+            <motion.button
+              className="block text-lg hover:text-red-400 transition-colors"
+              onClick={() => scrollToSection("top-builders")}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Top-Builders
+            </motion.button>
+
             {/* Sign In Button in Menu */}
             <button
               onClick={closeMenu}
