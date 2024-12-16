@@ -12,18 +12,18 @@ const Footer = () => {
         {/* WhatsApp Logo */}
         <div className="flex justify-center mb-4">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            src="/Whatsapp.png"
             alt="WhatsApp Logo"
             className="w-12 h-12" 
           />
         </div>
         
-        {/* "Syntax Squad" Font */}
+        
         <h2 className="text-3xl font-bold text-black mb-4 cursor-pointer">
           Syntax Squad
         </h2>
 
-        {/* Copyright and Footer Text */}
+        
         <p className="text-lg">
           &copy; {new Date().getFullYear()} Your Website Name. All rights reserved.
         </p>

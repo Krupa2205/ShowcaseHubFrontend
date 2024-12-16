@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Achievements.css'; // You can create a new CSS file to style the achievements
+import './Achievements.css';
 
 const Achievements = () => {
   const [showUploadCard, setShowUploadCard] = useState(false);
@@ -24,7 +24,7 @@ const Achievements = () => {
 
   // Save achievements to localStorage whenever the achievements array changes
   useEffect(() => {
-    console.log("Saving achievements to localStorage:", achievements);  // Debugging line
+    // console.log("Saving achievements to localStorage:", achievements); 
     localStorage.setItem('achievements', JSON.stringify(achievements));
   }, [achievements]);
 

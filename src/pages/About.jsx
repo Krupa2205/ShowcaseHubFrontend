@@ -7,7 +7,7 @@ function About() {
       id="about"
       className="relative h-[70vh] w-full flex items-center justify-center bg-gray-200 text-black"
     >
-      {/* About Us Content */}
+      {/* About Us */}
       <motion.div
         className="relative bg-white shadow-lg rounded-xl px-8 py-10 sm:px-5 sm:py-12 max-w-10xl w-[90%] transform transition-all duration-300 hover:scale-105"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -34,7 +34,7 @@ function About() {
           the world of technology. Join us as we journey towards a brighter, tech-driven tomorrow.
         </motion.p>
 
-        {/* WhatsApp Join Now Button */}
+        {/* WhatsApp Join Now */}
         <div className="mt-8 flex justify-center">
           <a
             href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A"
