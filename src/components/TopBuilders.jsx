@@ -50,12 +50,27 @@ const TopBuilders = () => {
     }
   };
 
+  const handleCancel = () => {
+    setShowUploadCard(false); // Close the upload card
+    setNewBuilder({ profilePic: '', username: '', linkedin: '', github: '' }); // Reset the form fields
+  };
+
   return (
     <section id="top-builders" className="bg-gray-100 py-10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6">
+        {/* Add Zoom Animation to the Title */}
+        <motion.div
+          className="text-center mb-6"
+          animate={{ scale: [1, 1.1, 1] }} // Continuous zoom
+          transition={{
+            duration: 2,
+            repeat: Infinity, // Repeat the animation infinitely
+            ease: "easeInOut",
+            repeatType: "loop",
+          }}
+        >
           <h2 className="text-3xl font-bold text-gray-800">Top Builders🔥</h2>
-        </div>
+        </motion.div>
 
         <div className="flex justify-center mb-6">
           <button
@@ -99,12 +114,20 @@ const TopBuilders = () => {
               onChange={handleImageChange}
               className="block w-full border-gray-300 rounded mb-4 p-2"
             />
-            <button
-              onClick={handleBuilderSubmit}
-              className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
-            >
-              Submit
-            </button>
+            <div className="flex gap-4">
+              <button
+                onClick={handleBuilderSubmit}
+                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
+              >
+                Submit
+              </button>
+              <button
+                onClick={handleCancel}
+                className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         )}
 
