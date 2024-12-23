@@ -67,7 +67,7 @@ const Footer = () => {
 
           {/* Join Now Button */}
           <motion.a
-            href="https://chat.whatsapp.com/Db2jMSIq1P7rDSQb14A" WhatsApp group
+            href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A" WhatsApp group
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center mt-6 px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition-transform"

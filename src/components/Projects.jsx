@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import projectImage from '../assets/p1.jpg'; 
 
 const Projects = () => {
   const [showUploadCard, setShowUploadCard] = useState(false);
@@ -60,22 +61,26 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-10 px-5">
-      <div className="max-w-5xl mx-auto">
-        <motion.div 
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl font-bold text-gray-800">
-            Welcome to the Project's Section 💻
-          </h2>
-        </motion.div>
 
-        <div className="flex justify-center mb-6">
+    
+    <motion.section
+      id="projects"
+      className="relative py-16 px-5 bg-gradient-to-r from-purple-300 via-blue-200 to-pink-400 animate-gradient-wave"
+    >
+      <div className="relative max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+        <h2 className="text-4xl font-extrabold text-gray-800 tracking-wide" style={{ fontFamily: 'Kanit, sans-serif' }}>
+        Project Showcase 💻
+      </h2>
+          <p className="text-gray-500 mt-2">
+            Your personal space to upload and manage projects.
+          </p>
+        </div>
+
+        {/* Upload Button */}
+        <div className="flex justify-center mb-8">
           <button
-            className="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-green-500 transition"
+            className="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-110 "
             onClick={() => {
               setShowUploadCard(!showUploadCard);
               setEditingIndex(null);
@@ -86,99 +91,89 @@ const Projects = () => {
           </button>
         </div>
 
+        {/* Upload Card */}
         {showUploadCard && (
-          <motion.div 
-            className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <h3 className="text-xl font-bold mb-4">
-              {editingIndex !== null ? 'Edit Your Project' : 'Upload Your Project'}
-            </h3>
-            <input
-              type="text"
-              name="title"
-              placeholder="Project Title"
-              value={newProject.title}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="Your Name"
-              value={newProject.username}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <textarea
-              name="description"
-              placeholder="Project Description"
-              value={newProject.description}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <input
-              type="text"
-              name="github"
-              placeholder="GitHub Link"
-              value={newProject.github}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <input
-              type="text"
-              name="linkedin"
-              placeholder="LinkedIn Post Link (Optional)"
-              value={newProject.linkedin}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <input
-              type="text"
-              name="liveLink"
-              placeholder="Live Project Link"
-              value={newProject.liveLink}
-              onChange={handleInputChange}
-              className="w-full mb-3 p-2 border border-gray-300 rounded"
-            />
-            <div className="flex justify-end gap-3">
-              <button
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-                onClick={handleProjectSubmit}
-              >
-                {editingIndex !== null ? 'Update' : 'Submit'}
-              </button>
-              <button
-                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </div>
+            <motion.div
+              className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-6"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img
+  src={projectImage}
+  alt="Project Showcase"
+  class="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto block mx-auto object-cover rounded-lg"
+/>
+
+
+              <div>
+                <h3 className="text-xl font-semibold mb-4">
+                  {editingIndex !== null ? 'Edit Project' : 'Add New Project'}
+                </h3>
+                {[
+                  { name: 'title', placeholder: 'Project Title' },
+                  { name: 'username', placeholder: 'Your Name' },
+                  { name: 'description', placeholder: 'Project Description' },
+                  { name: 'github', placeholder: 'GitHub Link' },
+                  { name: 'linkedin', placeholder: 'LinkedIn Link (Optional)' },
+                  { name: 'liveLink', placeholder: 'Live Project Link' },
+                ].map((field, i) => (
+                  <div key={i} className="mb-4">
+                    <input
+                      type="text"
+                      name={field.name}
+                      value={newProject[field.name]}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 text-gray-800 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      placeholder={field.placeholder}
+                    />
+                  </div>
+                ))}
+                <div className="flex justify-end gap-4">
+                  <button
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition"
+                    onClick={handleProjectSubmit}
+                  >
+                    {editingIndex !== null ? 'Update' : 'Submit'}
+                  </button>
+                  <button
+                    className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-6 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
 
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <motion.div 
-              key={index} 
-              className="bg-white p-4 rounded-lg shadow-md"
+            <motion.div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg transition-shadow transform hover:shadow-2xl hover:scale-105"
+              style={{ width: '320px', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
               <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-              <p className="mb-2 text-sm text-gray-600">{project.description}</p>
-              <p className="text-sm text-gray-500 mb-3">Uploaded by: {project.username}</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="mb-4 text-sm text-gray-600">{project.description}</p>
+              <div className="flex gap-3 flex-wrap">
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
+                    className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-1 px-3 rounded-lg hover:from-indigo-600 hover:to-purple-700 transition"
                   >
                     GitHub
                   </a>
@@ -188,7 +183,7 @@ const Projects = () => {
                     href={project.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
+                    className="bg-gradient-to-r from-blue-500 to-teal-600 text-white py-1 px-3 rounded-lg hover:from-blue-600 hover:to-teal-700 transition"
                   >
                     LinkedIn
                   </a>
@@ -198,13 +193,13 @@ const Projects = () => {
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
+                    className="bg-gradient-to-r from-green-500 to-lime-600 text-white py-1 px-3 rounded-lg hover:from-green-600 hover:to-lime-700 transition"
                   >
-                    Live Project
+                    Live
                   </a>
                 )}
                 <button
-                  className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition"
+                  className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-1 px-3 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
                   onClick={() => handleDelete(index)}
                 >
                   Delete
@@ -214,7 +209,7 @@ const Projects = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
