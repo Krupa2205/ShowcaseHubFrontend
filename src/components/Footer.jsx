@@ -48,7 +48,7 @@ const Footer = () => {
 
         {/* Footer Text */}
         <div className="text-center md:text-right">
-          <h2 className="text-4xl font-bold mb-4 cursor-pointer hover:text-purple-400 hover:underline">
+          <h2 className="text-4xl font-bold mb-4 cursor-pointer hover:text-blue-400 hover:underline">
             Syntax Squad
           </h2>
           <p className="text-lg">
