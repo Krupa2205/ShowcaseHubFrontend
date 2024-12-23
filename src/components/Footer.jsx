@@ -51,8 +51,8 @@ const Footer = () => {
           <h2 className="text-4xl font-bold mb-4 cursor-pointer hover:text-blue-400 hover:underline">
             Syntax Squad
           </h2>
-          <p className="text-lg">
-            &copy; {new Date().getFullYear()} Syntax Squad. All rights reserved.
+          <p className="text-lg font-bold">
+            &copy; {new Date().getFullYear()} Syntax Squad. "Learn and Grow Together with Us"
           </p>
           <p className="mt-4 text-sm md:text-base text-gray-400">
             Made with{' '}
@@ -67,18 +67,52 @@ const Footer = () => {
 
           {/* Join Now Button */}
           <motion.a
-            href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A" WhatsApp group
+            href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A" // WhatsApp group
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center mt-6 px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition-transform"
           >
             <img
-              src="/Whatsapp.png" 
+              src="/Whatsapp.png"
               alt="WhatsApp Logo"
               className="w-5 h-5 mr-2"
             />
             Join Now
           </motion.a>
+
+          {/* Social Media Icons */}
+          <div className="mt-6 flex justify-center space-x-6">
+            <motion.a
+              href="https://www.linkedin.com" // LinkedIn URL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-500 transition-all"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <i className="fab fa-linkedin fa-2x"></i>
+            </motion.a>
+            <motion.a
+              href="https://www.instagram.com" // Instagram URL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-pink-500 transition-all"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <i className="fab fa-instagram fa-2x"></i>
+            </motion.a>
+            <motion.a
+              href="https://github.com" // GitHub URL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-black transition-all"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <i className="fab fa-github fa-2x"></i>
+            </motion.a>
+          </div>
         </div>
       </div>
     </motion.footer>

@@ -5,7 +5,7 @@ function About() {
   return (
     <section
       id="about"
-      className="relative h-[70vh] w-full flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-200 to-pink-300 animate-gradient-wave bg-[length:200%_200%]"
+      className="relative h-[70vh] w-full flex items-center justify-center bg-gradient-to-r from-pink-200 via-blue-100 to-pink-300 animate-gradient-wave bg-[length:200%_200%]"
     >
       {/* About Us */}
       <motion.div
