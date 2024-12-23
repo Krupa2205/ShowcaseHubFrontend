@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import CelebrationImg from "../assets/gold.gif"
 
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
@@ -51,10 +52,17 @@ const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="py-12" style={{ backgroundColor: "#CDC1FF" }}>
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-        Achievements 🎉
+    <section
+      id="achievements"
+      className="py-12 relative bg-gradient-to-r from-pink-400 via-blue-200 to-pink-300 animate-gradient-wave bg-[length:200%_200%]"
+    >
+      <h2
+        className="text-4xl font-extrabold text-gray-800 tracking-wide text-center mb-8"
+        style={{ fontFamily: "Kanit, sans-serif" }}
+      >
+        Achievements 🎊
       </h2>
+
       <div className="flex flex-wrap justify-center gap-6">
         {achievements.map((achievement, index) => (
           <motion.div
@@ -79,59 +87,94 @@ const Achievements = () => {
           </motion.div>
         ))}
         <motion.button
-          className="w-36 h-12 bg-green-500 text-white rounded-md flex items-center justify-center text-base shadow-md hover:bg-green-600 transition duration-300 font-bold"
+          className="w-36 h-12 text-black rounded-md flex items-center justify-center text-base shadow-md font-bold"
           onClick={() => setShowUploadCard(!showUploadCard)}
           whileHover={{ scale: 1.1 }}
+          style={{
+            background: "linear-gradient(45deg, #81BFDA, #D4F6FF, #2196f3)",
+            backgroundSize: "300% 300%",
+            animation: "gradientAnimation 6s ease infinite",
+          }}
         >
           + Add Achievement
         </motion.button>
       </div>
-      {showUploadCard && (
-        <motion.div
-          className="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-lg"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-        >
-          <h3 className="text-xl font-bold text-gray-800 mb-4">Add New Achievement</h3>
-          <input
-            type="text"
-            name="name"
-            placeholder="Achievement Name"
-            value={newAchievement.name}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-          <textarea
-            name="description"
-            placeholder="Short Description"
-            value={newAchievement.description}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full mb-4"
-          />
-          <div className="flex justify-between">
-            <button
-              onClick={handleAddAchievement}
-              className="w-1/2 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition mr-2"
+
+      <AnimatePresence>
+        {showUploadCard && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full flex flex-col md:flex-row"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              transition={{ duration: 0.3 }}
             >
-              Submit
-            </button>
-            <button
-              onClick={handleCancel}
-              className="w-1/2 bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
-            >
-              Cancel
-            </button>
-          </div>
-        </motion.div>
-      )}
+              <div className="md:w-1/2 p-4 flex justify-center items-center">
+                <img
+                  src={CelebrationImg}
+                  alt="Showcase GIF"
+                  className="w-full h-auto max-w-xs object-contain"
+                />
+              </div>
+              <div className="md:w-1/2 p-4">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Add New Achievement</h3>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Achievement Name"
+                  value={newAchievement.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <textarea
+                  name="description"
+                  placeholder="Short Description"
+                  value={newAchievement.description}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="w-full mb-4"
+                />
+                <div className="flex justify-between">
+                  <button
+                    onClick={handleAddAchievement}
+                    className="w-1/2 text-white py-2 rounded-md transition mr-2 font-bold"
+                    style={{
+                      background: "linear-gradient(45deg, #A0D683, #72BF78, #A0D683)",
+                      backgroundSize: "300% 300%",
+                      animation: "gradientAnimation 5s ease infinite",
+                    }}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    onClick={handleCancel}
+                    className="w-1/2 text-white py-2 rounded-md transition font-bold"
+                    style={{
+                      background: "linear-gradient(45deg, #f44336, #e57373, #ef9a9a, #ffcdd2)",
+                      backgroundSize: "300% 300%",
+                      animation: "gradientAnimation 5s ease infinite",
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

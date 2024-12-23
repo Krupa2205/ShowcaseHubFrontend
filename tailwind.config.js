@@ -17,9 +17,19 @@ module.exports = {
     extend: {
       animation: {
         'spin-slow': 'spin 10s linear infinite',
+        'gradient-wave': 'gradient-wave 6s ease infinite',
+      },
+      keyframes: {
+        'gradient-wave': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
       },
     },
   },
   plugins: [],
 }
+
+
 

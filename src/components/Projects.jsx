@@ -138,13 +138,13 @@ const Projects = () => {
                 ))}
                 <div className="flex justify-end gap-4">
                   <button
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition"
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition font-bold"
                     onClick={handleProjectSubmit}
                   >
                     {editingIndex !== null ? 'Update' : 'Submit'}
                   </button>
                   <button
-                    className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-6 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
+                    className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-6 rounded-lg hover:from-red-600 hover:to-pink-700 transition font-bold"
                     onClick={handleCancel}
                   >
                     Cancel
