@@ -91,7 +91,7 @@ const Achievements = () => {
           onClick={() => setShowUploadCard(!showUploadCard)}
           whileHover={{ scale: 1.1 }}
           style={{
-            background: "linear-gradient(45deg, #81BFDA, #D4F6FF, #2196f3)",
+            background: "linear-gradient(45deg, #81BFDA, #FEEE91, #2196f3)",
             backgroundSize: "300% 300%",
             animation: "gradientAnimation 6s ease infinite",
           }}
