@@ -5,7 +5,7 @@ function About() {
   return (
     <section
       id="about"
-      className="relative h-[70vh] w-full flex items-center justify-center bg-gray-200 text-black"
+      className="relative h-[70vh] w-full flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-200 to-pink-300 animate-gradient-wave bg-[length:200%_200%]"
     >
       {/* About Us */}
       <motion.div
@@ -16,7 +16,8 @@ function About() {
         style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15)' }}
       >
         <motion.h2
-          className="text-3xl sm:text-4xl font-bold text-center mb-6"
+          className="text-4xl font-extrabold text-gray-800 tracking-wide text-center mb-8"
+          style={{ fontFamily: 'Kanit, sans-serif' }}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
