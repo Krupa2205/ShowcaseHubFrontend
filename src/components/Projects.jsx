@@ -72,9 +72,10 @@ const Projects = () => {
         <h2 className="text-4xl font-extrabold text-gray-800 tracking-wide" style={{ fontFamily: 'Kanit, sans-serif' }}>
         Project Showcase 💻
       </h2>
-          <p className="text-gray-500 mt-2">
-            Your personal space to upload and manage projects.
-          </p>
+      <p className="text-gray-600 mt-2 font-bold animate-bounce">
+      "Showcase your creativity—upload now and let the world see your brilliance✨😃!"
+</p>
+
         </div>
 
         {/* Upload Button */}
