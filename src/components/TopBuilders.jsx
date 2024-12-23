@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import BuilderImageLeft from "../assets/B1.avif"; 
+import BuilderImageRight from "../assets/Lap.gif";
+import { FaLinkedin, FaGithub } from "react-icons/fa"; 
 
 const TopBuilders = () => {
   const [builders, setBuilders] = useState([]);
-  const [newBuilder, setNewBuilder] = useState({
-    profilePic: '',
-    username: '',
-    linkedin: '',
-    github: '',
-  });
-
   const [showUploadCard, setShowUploadCard] = useState(false);
-
-  // Load builders from localStorage
-  useEffect(() => {
-    const savedBuilders = JSON.parse(localStorage.getItem('builders')) || [];
-    setBuilders(savedBuilders);
-  }, []);
-
-  // Save builders to localStorage whenever the builders array changes
-  useEffect(() => {
-    localStorage.setItem('builders', JSON.stringify(builders));
-  }, [builders]);
+  const [newBuilder, setNewBuilder] = useState({
+    image: "",
+    name: "",
+    description: "",
+    linkedin: "",
+    github: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,144 +25,189 @@ const TopBuilders = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewBuilder({ ...newBuilder, profilePic: reader.result });
+        setNewBuilder({ ...newBuilder, image: reader.result });
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleBuilderSubmit = () => {
-    if (newBuilder.username && newBuilder.linkedin && newBuilder.github) {
+  const handleAddBuilder = () => {
+    if (newBuilder.name && newBuilder.description && newBuilder.image) {
       setBuilders([...builders, newBuilder]);
-      setNewBuilder({ profilePic: '', username: '', linkedin: '', github: '' });
+      setNewBuilder({ image: "", name: "", description: "", linkedin: "", github: "" });
       setShowUploadCard(false);
     } else {
-      alert('Please fill in all the fields: Name, LinkedIn, and GitHub.');
+      alert("Please fill in all fields.");
     }
   };
 
   const handleCancel = () => {
-    setShowUploadCard(false); // Close the upload card
-    setNewBuilder({ profilePic: '', username: '', linkedin: '', github: '' }); // Reset the form fields
+    setShowUploadCard(false);
+    setNewBuilder({ image: "", name: "", description: "", linkedin: "", github: "" });
   };
 
   return (
-    <section id="top-builders" className="bg-gray-100 py-10">
-      <div className="container mx-auto px-4">
-        {/* Add Zoom Animation to the Title */}
-        <motion.div
-          className="text-center mb-6"
-          animate={{ scale: [1, 1.1, 1] }} // Continuous zoom
-          transition={{
-            duration: 2,
-            repeat: Infinity, // Repeat the animation infinitely
-            ease: "easeInOut",
-            repeatType: "loop",
-          }}
-        >
-          <h2 className="text-3xl font-bold text-gray-800">Top Builders🔥</h2>
-        </motion.div>
+    <section
+      id="top-builders"
+      className="py-12 relative bg-gradient-to-r from-pink-300 via-blue-200 to-pink-400 animate-gradient-wave bg-[length:200%_200%]"
+    >
+      <h2
+        className="text-4xl font-extrabold text-gray-800 tracking-wide text-center mb-8"
+        style={{ fontFamily: "Kanit, sans-serif" }}
+      >
+        Top Builders 🏆
+      </h2>
 
-        <div className="flex justify-center mb-6">
-          <button
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-600"
-            onClick={() => setShowUploadCard(!showUploadCard)}
+      <div className="flex flex-wrap justify-center gap-6">
+        {builders.map((builder, index) => (
+          <motion.div
+            key={index}
+            className="w-72 h-96 bg-white rounded-lg shadow-lg overflow-hidden"
+            whileHover={{
+              scale: 1.1,
+              rotate: 5,
+              boxShadow: "0px 20px 30px rgba(0, 0, 0, 0.2)",
+            }}
+            transition={{ duration: 0.3 }}
           >
-            Add Builder
-          </button>
-        </div>
-
-        {showUploadCard && (
-          <div className="bg-white shadow-md rounded p-6 max-w-md mx-auto mb-6">
-            <h3 className="text-lg font-semibold mb-4">Add New Builder</h3>
-            <input
-              type="text"
-              name="username"
-              placeholder="Name"
-              value={newBuilder.username}
-              onChange={handleInputChange}
-              className="block w-full border-gray-300 rounded mb-4 p-2"
+            <img
+              src={builder.image}
+              alt={builder.name}
+              className="w-full h-56 object-cover"
             />
-            <input
-              type="url"
-              name="linkedin"
-              placeholder="LinkedIn Profile URL"
-              value={newBuilder.linkedin}
-              onChange={handleInputChange}
-              className="block w-full border-gray-300 rounded mb-4 p-2"
-            />
-            <input
-              type="url"
-              name="github"
-              placeholder="GitHub Profile URL"
-              value={newBuilder.github}
-              onChange={handleInputChange}
-              className="block w-full border-gray-300 rounded mb-4 p-2"
-            />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="block w-full border-gray-300 rounded mb-4 p-2"
-            />
-            <div className="flex gap-4">
-              <button
-                onClick={handleBuilderSubmit}
-                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
-              >
-                Submit
-              </button>
-              <button
-                onClick={handleCancel}
-                className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {builders.map((builder, index) => (
-            <motion.div
-              key={index}
-              className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <div className="rounded-full overflow-hidden border-4 border-blue-400 mb-4 w-24 h-24">
-                {builder.profilePic ? (
-                  <img src={builder.profilePic} alt={builder.username} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-gray-400">
-                    No Image
-                  </div>
+            <div className="p-4">
+              <h3 className="text-xl font-semibold text-gray-700">{builder.name}</h3>
+              <p className="text-gray-500 mt-2">{builder.description}</p>
+              <div className="flex space-x-4 mt-4">
+                {builder.linkedin && (
+                  <a href={builder.linkedin} target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin size={24} className="text-blue-600" />
+                  </a>
+                )}
+                {builder.github && (
+                  <a href={builder.github} target="_blank" rel="noopener noreferrer">
+                    <FaGithub size={24} className="text-gray-800" />
+                  </a>
                 )}
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">{builder.username}</h3>
-              <div className="flex gap-4 mt-2">
-                <a
-                  href={builder.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-700 hover:text-blue-900"
-                >
-                  <FaLinkedin size={24} />
-                </a>
-                <a
-                  href={builder.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  <FaGithub size={24} />
-                </a>
+            </div>
+          </motion.div>
+        ))}
+        <motion.button
+          className="w-36 h-12 text-black rounded-md flex items-center justify-center text-base shadow-md font-bold"
+          onClick={() => setShowUploadCard(!showUploadCard)}
+          whileHover={{ scale: 1.1 }}
+          style={{
+            background: "linear-gradient(45deg, #81BFDA, #FEEE91, #2196f3, #FEEE91)",
+            backgroundSize: "300% 300%",
+            animation: "gradientAnimation 6s ease infinite",
+          }}
+        >
+          + Add Builder
+        </motion.button>
+      </div>
+
+      <AnimatePresence>
+        {showUploadCard && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full flex flex-col md:flex-row"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Left Image */}
+              <div className="flex justify-center md:w-1/4 mb-6 md:mb-0">
+                <img
+                  src={BuilderImageLeft}
+                  alt="Builder Left"
+                  className="w-48 h-48 object-cover rounded-lg" // Square shape
+                />
+              </div>
+              {/* Form Area */}
+              <div className="md:w-1/2 p-4">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Add New Builder</h3>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Builder Name"
+                  value={newBuilder.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <textarea
+                  name="description"
+                  placeholder="Short Description"
+                  value={newBuilder.description}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="w-full mb-4"
+                />
+                <input
+                  type="url"
+                  name="linkedin"
+                  placeholder="LinkedIn URL"
+                  value={newBuilder.linkedin}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <input
+                  type="url"
+                  name="github"
+                  placeholder="GitHub URL"
+                  value={newBuilder.github}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+                <div className="flex justify-between">
+                  <button
+                    onClick={handleAddBuilder}
+                    className="w-1/2 text-white py-2 rounded-md transition mr-2 font-bold"
+                    style={{
+                      background: "linear-gradient(45deg, #A0D683, #72BF78, #A0D683)",
+                      backgroundSize: "300% 300%",
+                      animation: "gradientAnimation 5s ease infinite",
+                    }}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    onClick={handleCancel}
+                    className="w-1/2 text-white py-2 rounded-md transition font-bold"
+                    style={{
+                      background: "linear-gradient(45deg, #f44336, #e57373, #ef9a9a, #ffcdd2)",
+                      backgroundSize: "300% 300%",
+                      animation: "gradientAnimation 5s ease infinite",
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+              {/* Right Image */}
+              <div className="flex justify-center md:w-1/4 mb-6 md:mb-0">
+                <img
+                  src={BuilderImageRight}
+                  alt="Builder Right"
+                  className="w-48 h-48 object-cover rounded-lg" // Square shape
+                />
               </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
