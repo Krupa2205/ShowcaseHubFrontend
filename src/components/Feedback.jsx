@@ -118,7 +118,7 @@ const FeedbackForm = () => {
           </form>
           {feedbackSent && (
             <div className="mt-4 text-green-600 font-semibold">
-              Feedback sent successfully!
+              Thanks for your feedback✨🤗
             </div>
           )}
         </div>
