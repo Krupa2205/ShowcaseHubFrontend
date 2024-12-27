@@ -7,6 +7,7 @@ import { div } from 'framer-motion/client';
 import Achievements from './components/Achievements';
 import Footer from './components/Footer';
 import TopBuilders from './components/TopBuilders';
+import Feedback from './components/Feedback';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Projects/>
     <Achievements/>
     <TopBuilders/>
+    <Feedback/>
     <Footer/>
     </div>
   );
