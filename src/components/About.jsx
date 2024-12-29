@@ -59,9 +59,7 @@ function About() {
           building brighter futures, our mission is to inspire creativity,
           foster innovation, and deliver impactful solutions in the
           ever-evolving world of technology. Join us as we embark on an exciting
-          journey towards a tech-driven tomorrow! ✨ <span className="font-bold"> Meet our incredible group
-          admin, Ujjwal Sharma✨🔥,</span> a Full Stack Developer and a Next Level
-          project builder <span className="font-semibold">who's connecting us all together..</span>🔥🚀<span className="font-semibold">Don’t
+          journey towards a tech-driven tomorrow! ✨ <span className="font-bold"> <span className="font-semibold">Don’t
           wait—join us today! Let’s learn, grow, and innovate together with the
           SYNTAX SQUAD!</span>
         </motion.p>
