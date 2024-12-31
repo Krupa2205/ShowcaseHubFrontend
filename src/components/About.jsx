@@ -68,7 +68,7 @@ function About() {
         {/* WhatsApp Join Now */}
         <div className="mt-8 flex justify-center">
           <a
-            href="https://chat.whatsapp.com/Db2jMSIq8G51P7rDSQb14A"
+            href="https://chat.whatsapp.com/Db2jMSIq8G514A"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
