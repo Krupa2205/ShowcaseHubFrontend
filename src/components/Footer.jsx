@@ -25,7 +25,7 @@ const Footer = () => {
           transition={{ duration: 0.5 }}
         >
           <img
-            src="/awesome.gif" // Update the path to your GIF
+            src="/awesome.gif" 
             alt="Easter Egg Surprise"
             className="w-64 h-64 object-cover"
           />
@@ -40,7 +40,7 @@ const Footer = () => {
           whileTap={{ scale: 1 }}
         >
           <img
-            src="/Logo.jpg" // Update the path to your logo
+            src="/Logo.jpg" 
             alt="Syntax Squad Logo"
             className="w-28 h-28 md:w-36 md:h-36 object-contain"
           />
@@ -80,10 +80,10 @@ const Footer = () => {
             Join Now
           </motion.a>
 
-          {/* Social Media Icons */}
+          
           <div className="mt-6 flex justify-center space-x-6">
             <motion.a
-              href="https://www.linkedin.com" // LinkedIn URL
+              href="https://www.linkedin.com" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-500 transition-all"
@@ -93,7 +93,7 @@ const Footer = () => {
               <i className="fab fa-linkedin fa-2x"></i>
             </motion.a>
             <motion.a
-              href="https://www.instagram.com" // Instagram URL
+              href="https://www.instagram.com" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-pink-500 transition-all"
@@ -103,7 +103,7 @@ const Footer = () => {
               <i className="fab fa-instagram fa-2x"></i>
             </motion.a>
             <motion.a
-              href="https://github.com" // GitHub URL
+              href="https://github.com" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-black transition-all"

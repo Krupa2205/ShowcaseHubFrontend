@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Builder from "../assets/TopBuilder.gif"; // Ensure this path is correct
+import Builder from "../assets/TopBuilder.gif"; 
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const TopBuilders = () => {
     github: "",
   });
 
-  // Fetch existing builders from backend on component mount
+  // Fetch existing builders from backend ....
   useEffect(() => {
     axios.get("http://localhost:5000/api/topbuilder")
       .then(response => {
