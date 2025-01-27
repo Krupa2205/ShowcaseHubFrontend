@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useClerk, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"; // Import Clerk components
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { openSignIn } = useClerk(); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,12 +24,10 @@ function Header() {
 
   return (
     <header className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden">
-      {/* Add Google Fonts */}
       <link
         href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap"
         rel="stylesheet"
       />
-
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/Bganimation.mp4"
@@ -36,18 +36,24 @@ function Header() {
         muted
       ></video>
 
-      {/* Navbar */}
       <nav className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-black bg-opacity-50 backdrop-blur-sm z-20">
         <div className="text-white text-3xl font-bold cursor-pointer hover:text-blue-500">
           Syntax Squad
         </div>
 
         <div className="flex items-center space-x-4">
-          {!isMenuOpen && (
-            <button className="hidden md:block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg shadow-lg font-bold">
+          {/* Show profile button if signed in, otherwise show sign-in button */}
+          <SignedOut>
+            <button
+              onClick={openSignIn}
+              className="hidden md:block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg shadow-lg font-bold"
+            >
               Sign In
             </button>
-          )}
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
           <button
             onClick={toggleMenu}
             className="text-white text-3xl focus:outline-none"
@@ -57,10 +63,9 @@ function Header() {
         </div>
       </nav>
 
-      {/* Slide-in Menu */}
       {isMenuOpen && (
         <motion.div
-          className="absolute top-[4rem] right-0 h-[70vh] w-64 bg-black bg-opacity-70 z-30 shadow-lg text-white"
+          className="absolute top-[4.5rem] right-0 h-[70vh] w-64 bg-black bg-opacity-70 z-30 shadow-lg text-white font-extrabold"
           initial={{ x: "100%" }}
           animate={{ x: "0%" }}
           exit={{ x: "100%" }}
@@ -83,7 +88,6 @@ function Header() {
             >
               About Us
             </motion.button>
-
             <motion.button
               className="block text-lg hover:text-yellow-300 transition-colors"
               onClick={() => scrollToSection("projects")}
@@ -100,7 +104,6 @@ function Header() {
             >
               Achievements
             </motion.button>
-
             <motion.button
               className="block text-lg hover:text-red-400 transition-colors"
               onClick={() => scrollToSection("top-builders")}
@@ -109,21 +112,10 @@ function Header() {
             >
               Top-Builders
             </motion.button>
-
-            {/* Sign In Button in Menu */}
-            <button
-              onClick={closeMenu}
-              className="block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg shadow-lg font-bold hover:translate-y-1 hover:shadow-md active:translate-y-2 active:shadow-inner"
-            >
-              Sign In
-            </button>
           </div>
         </motion.div>
       )}
-            
-           
 
-      {/* Header Content */}
       <div
         id="home"
         className="relative z-10 flex flex-col items-center space-y-6 mt-16"

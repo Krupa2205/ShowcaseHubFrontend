@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import projectImage from '../assets/p1.jpg'; 
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import axios from "axios";
+import projectImage from "../assets/p1.jpg";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FiLink } from "react-icons/fi";
 
 const Projects = () => {
   const [showUploadCard, setShowUploadCard] = useState(false);
   const [projects, setProjects] = useState([]);
   const [newProject, setNewProject] = useState({
-    title: '',
-    description: '',
-    github: '',
-    linkedin: '',
-    liveLink: '',
-    username: '',
+    title: "",
+    description: "",
+    github: "",
+    linkedin: "",
+    liveLink: "",
+    username: "",
   });
   const [editingIndex, setEditingIndex] = useState(null);
 
+  // Fetch projects from the backend
   useEffect(() => {
-    try {
-      const savedProjects = JSON.parse(localStorage.getItem('projects')) || [];
-      setProjects(savedProjects);
-    } catch (error) {
-      console.error('Error reading projects from localStorage:', error);
-    }
+    axios
+      .get("http://localhost:5000/api/projects")
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+      });
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('projects', JSON.stringify(projects));
-  }, [projects]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,63 +39,110 @@ const Projects = () => {
   const handleProjectSubmit = () => {
     if (newProject.title && newProject.description && newProject.username) {
       if (editingIndex !== null) {
-        const updatedProjects = [...projects];
-        updatedProjects[editingIndex] = newProject;
-        setProjects(updatedProjects);
-        setEditingIndex(null);
+        // Update the project
+        axios
+          .put(
+            `http://localhost:5000/api/projects/${projects[editingIndex]._id}`,
+            newProject
+          )
+          .then((response) => {
+            const updatedProjects = [...projects];
+            updatedProjects[editingIndex] = response.data;
+            setProjects(updatedProjects);
+            setEditingIndex(null);
+          })
+          .catch((error) => {
+            console.error("Error updating project:", error);
+          });
       } else {
-        setProjects([...projects, newProject]);
+        // Add new project
+        axios
+          .post("http://localhost:5000/api/projects", newProject)
+          .then((response) => {
+            setProjects([...projects, response.data]);
+          })
+          .catch((error) => {
+            console.error("Error adding project:", error);
+          });
       }
-      setNewProject({ title: '', description: '', github: '', linkedin: '', liveLink: '', username: '' });
+      setNewProject({
+        title: "",
+        description: "",
+        github: "",
+        linkedin: "",
+        liveLink: "",
+        username: "",
+      });
       setShowUploadCard(false);
     } else {
-      alert('Please fill in the required fields: Title, Description, and Your Name.');
+      alert(
+        "Please fill in the required fields: Title, Description, and Your Name."
+      );
     }
   };
 
   const handleCancel = () => {
-    setNewProject({ title: '', description: '', github: '', linkedin: '', liveLink: '', username: '' });
+    setNewProject({
+      title: "",
+      description: "",
+      github: "",
+      linkedin: "",
+      liveLink: "",
+      username: "",
+    });
     setShowUploadCard(false);
   };
 
-  const handleDelete = (index) => {
-    const updatedProjects = projects.filter((_, i) => i !== index);
-    setProjects(updatedProjects);
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/api/projects/${id}`)
+      .then(() => {
+        setProjects(projects.filter((project) => project._id !== id));
+      })
+      .catch((error) => {
+        console.error("Error deleting project:", error);
+      });
   };
 
   return (
-
-    
     <motion.section
       id="projects"
       className="relative py-16 px-5 bg-gradient-to-r from-purple-300 via-blue-200 to-pink-400 animate-gradient-wave"
     >
       <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-12">
-        <h2 className="text-4xl font-extrabold text-gray-800 tracking-wide" style={{ fontFamily: 'Kanit, sans-serif' }}>
-        Project Showcase 💻
-      </h2>
-      <p className="text-gray-600 mt-2 font-bold animate-bounce">
-      "Showcase your creativity—upload now and let the world see your brilliance✨😃!"
-</p>
-
+          <h2
+            className="text-4xl font-extrabold text-gray-800 tracking-wide"
+            style={{ fontFamily: "Kanit, sans-serif" }}
+          >
+            Project Showcase 💻
+          </h2>
+          <p className="text-gray-600 mt-2 font-bold animate-bounce">
+            "Showcase your creativity—upload now and let the world see your
+            brilliance✨😃!"
+          </p>
         </div>
 
-        {/* Upload Button */}
         <div className="flex justify-center mb-8">
           <button
             className="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-110 "
             onClick={() => {
               setShowUploadCard(!showUploadCard);
               setEditingIndex(null);
-              setNewProject({ title: '', description: '', github: '', linkedin: '', liveLink: '', username: '' });
+              setNewProject({
+                title: "",
+                description: "",
+                github: "",
+                linkedin: "",
+                liveLink: "",
+                username: "",
+              });
             }}
           >
             +
           </button>
         </div>
 
-        {/* Upload Card */}
         {showUploadCard && (
           <motion.div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -107,23 +157,22 @@ const Projects = () => {
               transition={{ duration: 0.3 }}
             >
               <img
-  src={projectImage}
-  alt="Project Showcase"
-  class="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto block mx-auto object-cover rounded-lg"
-/>
-
+                src={projectImage}
+                alt="Project Showcase"
+                className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto block mx-auto object-cover rounded-lg"
+              />
 
               <div>
                 <h3 className="text-xl font-semibold mb-4">
-                  {editingIndex !== null ? 'Edit Project' : 'Add New Project'}
+                  {editingIndex !== null ? "Edit Project" : "Add New Project"}
                 </h3>
                 {[
-                  { name: 'title', placeholder: 'Project Title' },
-                  { name: 'username', placeholder: 'Your Name' },
-                  { name: 'description', placeholder: 'Project Description' },
-                  { name: 'github', placeholder: 'GitHub Link' },
-                  { name: 'linkedin', placeholder: 'LinkedIn Link (Optional)' },
-                  { name: 'liveLink', placeholder: 'Live Project Link' },
+                  { name: "title", placeholder: "Project Title" },
+                  { name: "username", placeholder: "Your Name" },
+                  { name: "description", placeholder: "Project Description" },
+                  { name: "github", placeholder: "GitHub Link" },
+                  { name: "linkedin", placeholder: "LinkedIn Link (Optional)" },
+                  { name: "liveLink", placeholder: "Live Project Link" },
                 ].map((field, i) => (
                   <div key={i} className="mb-4">
                     <input
@@ -141,7 +190,7 @@ const Projects = () => {
                     className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition"
                     onClick={handleProjectSubmit}
                   >
-                    {editingIndex !== null ? 'Update' : 'Submit'}
+                    {editingIndex !== null ? "Update" : "Submit"}
                   </button>
                   <button
                     className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-6 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
@@ -155,28 +204,37 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={index}
               className="bg-white p-6 rounded-lg shadow-lg transition-shadow transform hover:shadow-2xl hover:scale-105"
-              style={{ width: '320px', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)' }}
+              style={{
+                width: "320px",
+                boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)",
+              }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-              <p className="mb-4 text-sm text-gray-600">{project.description}</p>
-              <div className="flex gap-3 flex-wrap">
+              <h3 className="text-lg font-bold mb-2">
+                {project.title} <br />
+                <span className="font-bold italic text-gray-600">
+                  by "{project.username}"
+                </span>
+              </h3>
+              <p className="mb-4 text-sm text-gray-600">
+                {project.description}
+              </p>
+              <div className="flex justify-center items-center space-x-6 mt-4">
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-1 px-3 rounded-lg hover:from-indigo-600 hover:to-purple-700 transition"
+                    className="text-black text-3xl transition-transform transform hover:scale-110"
                   >
-                    GitHub
+                    <FaGithub />
                   </a>
                 )}
                 {project.linkedin && (
@@ -184,9 +242,9 @@ const Projects = () => {
                     href={project.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-blue-500 to-teal-600 text-white py-1 px-3 rounded-lg hover:from-blue-600 hover:to-teal-700 transition"
+                    className="text-blue-600 text-3xl transition-transform transform hover:scale-110"
                   >
-                    LinkedIn
+                    <FaLinkedin />
                   </a>
                 )}
                 {project.liveLink && (
@@ -194,14 +252,29 @@ const Projects = () => {
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-green-500 to-lime-600 text-white py-1 px-3 rounded-lg hover:from-green-600 hover:to-lime-700 transition"
+                    className="text-3xl transition-transform transform hover:scale-110"
                   >
-                    Live
+                    <FiLink />
                   </a>
                 )}
+              </div>
+
+              <div className="flex justify-end gap-3 mt-4">
+                <button
+                  className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-1 px-3 rounded-lg hover:from-yellow-600 hover:to-orange-700 transition"
+                  onClick={() => {
+                    setEditingIndex(index);
+                    setShowUploadCard(true);
+                    setNewProject({
+                      ...project,
+                    });
+                  }}
+                >
+                  Edit
+                </button>
                 <button
                   className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-1 px-3 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
-                  onClick={() => handleDelete(index)}
+                  onClick={() => handleDelete(project._id)}
                 >
                   Delete
                 </button>
