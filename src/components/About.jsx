@@ -55,20 +55,20 @@ function About() {
             },
           }}
         >
-          We are the <span className="font-bold">Syntax Squad 👋🏻❤️💻</span> Dedicated to empowering developers and
+          We are the <span className="font-bold">ShowcaseHub  👋🏻❤️💻</span> Dedicated to empowering developers and
           building brighter futures, our mission is to inspire creativity,
           foster innovation, and deliver impactful solutions in the
-          ever-evolving world of technology. Join us as we embark on an exciting
+          ever-evolving world of technology.Showcase an exciting
           journey towards a tech-driven tomorrow! ✨ 
          <span className="font-semibold">Don’t
-          wait—join us today! Let’s learn, grow, and innovate together with the
-          SYNTAX SQUAD!</span>
+          wait—Let’s learn, grow, and innovate together with the
+          ShowcaseHub !</span>
         </motion.p>
 
-        {/* WhatsApp Join Now */}
-        <div className="mt-8 flex justify-center">
+    
+        {/* <div className="mt-8 flex justify-center">
           <a
-            href="https://chat.whatsapp.com/Db2jMSIq8G514A"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
@@ -80,7 +80,7 @@ function About() {
             />
             Join Now on WhatsApp
           </a>
-        </div>
+        </div> */}
       </motion.div>
     </section>
   );

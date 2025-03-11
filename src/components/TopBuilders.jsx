@@ -90,7 +90,8 @@ const TopBuilders = () => {
         className="text-4xl font-extrabold text-gray-800 tracking-wide text-center mb-8"
         style={{ fontFamily: "Kanit, sans-serif" }}
       >
-        Top Builders 🏆
+        {/* Top Builders 🏆 */}
+        Your Profiles🏆
       </h2>
 
       <div className="flex flex-wrap justify-center gap-6">

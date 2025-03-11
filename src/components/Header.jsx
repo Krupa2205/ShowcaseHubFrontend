@@ -38,7 +38,7 @@ function Header() {
 
       <nav className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-black bg-opacity-50 backdrop-blur-sm z-20">
         <div className="text-white text-3xl font-bold cursor-pointer hover:text-blue-500">
-          Syntax Squad
+        ShowcaseHub 
         </div>
 
         <div className="flex items-center space-x-4">
@@ -98,14 +98,6 @@ function Header() {
             </motion.button>
             <motion.button
               className="block text-lg hover:text-red-400 transition-colors"
-              onClick={() => scrollToSection("achievements")}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3 }}
-            >
-              Achievements
-            </motion.button>
-            <motion.button
-              className="block text-lg hover:text-red-400 transition-colors"
               onClick={() => scrollToSection("top-builders")}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.3 }}
@@ -121,7 +113,7 @@ function Header() {
         className="relative z-10 flex flex-col items-center space-y-6 mt-16"
       >
         <motion.img
-          src="/Logo.jpg"
+          src="/ShowcaseLogo.webp"
           alt="Syntax Squad Logo"
           className="h-32 w-32 rounded-full shadow-lg"
           animate={{ rotate: [0, 360] }}
@@ -139,7 +131,7 @@ function Header() {
             color: "#4DA1A9",
           }}
         >
-          Welcome to the <span className="text-blue-500">Syntax Squad</span>
+          Welcome to the <span className="text-blue-500">ShowcaseHub</span>
         </motion.h1>
         <motion.p
           className="text-lg sm:text-2xl text-white font-bold"

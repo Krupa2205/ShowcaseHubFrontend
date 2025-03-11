@@ -4,7 +4,6 @@ import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut, SignIn, SignUp } 
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
-import Achievements from './components/Achievements';
 import Footer from './components/Footer';
 import TopBuilders from './components/TopBuilders';
 import Feedback from './components/Feedback';
@@ -23,7 +22,6 @@ function App() {
                 <Header />
                 <About />
                 <Projects />
-                <Achievements />
                 <TopBuilders />
                 <Feedback />
                 <Footer />

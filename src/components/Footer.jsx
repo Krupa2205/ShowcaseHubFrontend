@@ -40,7 +40,7 @@ const Footer = () => {
           whileTap={{ scale: 1 }}
         >
           <img
-            src="/Logo.jpg" 
+            src="/ShowcaseLogo.webp" 
             alt="Syntax Squad Logo"
             className="w-28 h-28 md:w-36 md:h-36 object-contain"
           />
@@ -49,10 +49,10 @@ const Footer = () => {
         {/* Footer Text */}
         <div className="text-center md:text-right">
           <h2 className="text-4xl font-bold mb-4 cursor-pointer hover:text-blue-400 hover:underline">
-            Syntax Squad
+          ShowcaseHub 
           </h2>
           <p className="text-lg font-bold">
-            &copy; {new Date().getFullYear()} Syntax Squad. "Learn and Grow Together with Us"
+            &copy; {new Date().getFullYear()} ShowcaseHub . "Learn and Grow Together"
           </p>
           <p className="mt-4 text-sm md:text-base text-gray-400">
             Made with{' '}
@@ -65,7 +65,7 @@ const Footer = () => {
             by Krupa
           </p>
 
-          {/* Join Now Button */}
+          {/* Join Now Button
           <motion.a
             href="https://chat.whatsapp.com/Db2jMSIq8GSQb14A" 
             target="_blank"
@@ -78,7 +78,7 @@ const Footer = () => {
               className="w-5 h-5 mr-2"
             />
             Join Now
-          </motion.a>
+          </motion.a> */}
 
           
           <div className="mt-6 flex justify-center space-x-6">
