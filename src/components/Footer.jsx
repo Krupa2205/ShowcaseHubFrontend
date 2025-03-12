@@ -40,7 +40,7 @@ const Footer = () => {
           whileTap={{ scale: 1 }}
         >
           <img
-            src="/ShowcaseLogo.webp" 
+            src="/SHowcaseHubLogo2.jpg" 
             alt="Syntax Squad Logo"
             className="w-28 h-28 md:w-36 md:h-36 object-contain"
           />
