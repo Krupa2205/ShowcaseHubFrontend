@@ -40,9 +40,9 @@ const Footer = () => {
           whileTap={{ scale: 1 }}
         >
           <img
-            src="/SHowcaseHubLogo2.jpg" 
+            src="/Logo1.jpg" 
             alt="Syntax Squad Logo"
-            className="w-28 h-28 md:w-36 md:h-36 object-contain"
+            className="w-28 h-28 md:w-36 md:h-36 object-contain rounded-full shadow-lg" 
           />
         </motion.div>
 
