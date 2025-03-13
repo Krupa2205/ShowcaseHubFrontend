@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 import AboutImg from "../assets/AboutImg.jpeg";
 
 function About() {
@@ -55,32 +55,22 @@ function About() {
             },
           }}
         >
-          We are the <span className="font-bold">ShowcaseHub  👋🏻❤️💻</span> Dedicated to empowering developers and
-          building brighter futures, our mission is to inspire creativity,
-          foster innovation, and deliver impactful solutions in the
-          ever-evolving world of technology.Showcase an exciting
-          journey towards a tech-driven tomorrow! ✨ 
-         <span className="font-semibold">Don’t
-          wait—Let’s learn, grow, and innovate together with the
-          ShowcaseHub !</span>
+          We are the <span className="font-bold">ShowcaseHub</span> 👋🏻❤️💻 – a
+          dynamic platform built for developers, creators, and innovators like
+          you! Our mission is to provide a space where you can showcase your
+          projects, build your profile, and share your creations with the world.
+          At ShowcaseHub, we believe every project tells a story, and every
+          developer deserves a stage to shine. Whether you're a beginner
+          showcasing your first app or a seasoned pro displaying your latest
+          masterpiece, this is your space to inspire and be inspired. Join us in
+          fostering a community that celebrates creativity, collaboration, and
+          innovation. Together, we can build a brighter, tech-driven future. ✨
+          <span className="font-semibold">
+            Don’t wait—upload your projects, connect with like-minded creators,
+            and let’s learn, grow, and innovate together with ShowcaseHub!
+          </span>
         </motion.p>
 
-    
-        {/* <div className="mt-8 flex justify-center">
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
-          >
-            <img
-              src="/Whatsapp.png"
-              alt="WhatsApp Logo"
-              className="w-6 h-6 mr-2"
-            />
-            Join Now on WhatsApp
-          </a>
-        </div> */}
       </motion.div>
     </section>
   );

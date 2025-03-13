@@ -148,7 +148,7 @@ const TopBuilders = () => {
             animation: "gradientAnimation 6s ease infinite",
           }}
         >
-          + Add Builder
+          + Add your Profile
         </motion.button>
       </div>
 

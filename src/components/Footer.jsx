@@ -65,25 +65,12 @@ const Footer = () => {
             by Krupa
           </p>
 
-          {/* Join Now Button
-          <motion.a
-            href="https://chat.whatsapp.com/Db2jMSIq8GSQb14A" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center mt-6 px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition-transform"
-          >
-            <img
-              src="/Whatsapp.png"
-              alt="WhatsApp Logo"
-              className="w-5 h-5 mr-2"
-            />
-            Join Now
-          </motion.a> */}
+         
 
           
           <div className="mt-6 flex justify-center space-x-6">
             <motion.a
-              href="https://www.linkedin.com" 
+              href="https://www.linkedin.com/in/kaklotar-k/" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-500 transition-all"
@@ -93,7 +80,7 @@ const Footer = () => {
               <i className="fab fa-linkedin fa-2x"></i>
             </motion.a>
             <motion.a
-              href="https://www.instagram.com" 
+              href="#" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-pink-500 transition-all"
@@ -103,7 +90,7 @@ const Footer = () => {
               <i className="fab fa-instagram fa-2x"></i>
             </motion.a>
             <motion.a
-              href="https://github.com" 
+              href="https://github.com/Krupa2205" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-black transition-all"

@@ -23,14 +23,14 @@ function Header() {
   };
 
   return (
-    <header className="relative h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-purple-300 via-blue-200 to-pink-400 animate-gradient-wave">
+    <header className="py-12 relative bg-gradient-to-r from-pink-300 via-blue-200 to-pink-400 animate-gradient-wave bg-[length:200%_200%]">
       <link
         href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap"
         rel="stylesheet"
       />
 
       <nav className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-black bg-opacity-50 backdrop-blur-sm z-20">
-        <div className="text-white text-3xl font-bold cursor-pointer hover:text-blue-500">
+        <div className="text-white text-3xl font-bold cursor-pointer hover:text-pink-500">
         ShowcaseHub 
         </div>
 
@@ -58,7 +58,7 @@ function Header() {
 
       {isMenuOpen && (
         <motion.div
-          className="absolute top-[4.2rem] right-0 h-[45vh] w-80 bg-black bg-opacity-70 z-30 shadow-lg text-white font-extrabold rounded-sm"
+          className="absolute top-[4.2rem] right-0 h-[45vh] w-80 bg-black bg-opacity-70 z-30 shadow-lg text-white font-extrabold rounded-lg"
           initial={{ x: "100%" }}
           animate={{ x: "0%" }}
           exit={{ x: "100%" }}
@@ -96,7 +96,7 @@ function Header() {
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.3 }}
             >
-              Top-Builders
+              Creator's
             </motion.button>
           </div>
         </motion.div>
@@ -122,10 +122,10 @@ function Header() {
           whileHover={{
             scale: 1.1,
             textShadow: "0px 0px 8px rgb(255, 255, 255)",
-            color: "#4DA1A9",
+            color: "#E53888",
           }}
         >
-          Welcome to the <span className="text-blue-500">ShowcaseHub</span>
+          Welcome to the <span className="text-pink-500">ShowcaseHub</span>
         </motion.h1>
         <motion.p
           className="text-lg sm:text-2xl text-white font-bold"
@@ -133,11 +133,9 @@ function Header() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
         >
-          Empowering Developers. Building Futures.
+          "From Code to Creation: ShowcaseHub🔥"
         </motion.p>
-        <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl shadow-lg transform transition-all duration-300 hover:translate-y-1 hover:shadow-md active:translate-y-2 active:shadow-inner font-bold">
-          Get Started
-        </button>
+       
       </div>
     </header>
   );

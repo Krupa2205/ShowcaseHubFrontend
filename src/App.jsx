@@ -5,7 +5,7 @@ import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
-import TopBuilders from './components/TopBuilders';
+import Profile from './components/Profile';
 import Feedback from './components/Feedback';
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;  
@@ -22,7 +22,7 @@ function App() {
                 <Header />
                 <About />
                 <Projects />
-                <TopBuilders />
+                <Profile />
                 <Feedback />
                 <Footer />
               </>
