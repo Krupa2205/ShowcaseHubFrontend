@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import projectImage from "../assets/p1.jpg";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FiLink } from "react-icons/fi";
+import { useClerk, SignedIn, SignedOut } from "@clerk/clerk-react";
 
 const Projects = () => {
   const [showUploadCard, setShowUploadCard] = useState(false);
@@ -18,6 +18,8 @@ const Projects = () => {
     username: "",
   });
   const [editingIndex, setEditingIndex] = useState(null);
+  const { openSignIn } = useClerk();
+  const [showProgress, setShowProgress] = useState(false); // State for progress bar
 
   // Fetch projects from the backend
   useEffect(() => {
@@ -30,6 +32,16 @@ const Projects = () => {
         console.error("Error fetching projects:", error);
       });
   }, []);
+
+  // Show progress bar for 3 seconds
+  useEffect(() => {
+    if (showProgress) {
+      const timer = setTimeout(() => {
+        setShowProgress(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showProgress]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -109,6 +121,13 @@ const Projects = () => {
       id="projects"
       className="relative py-16 px-5 bg-gradient-to-r from-purple-300 via-blue-200 to-pink-400 animate-gradient-wave"
     >
+      {/* Progress Bar */}
+      {showProgress && (
+  <div className="fixed top-4 right-4 bg-white border border-green-500 text-black px-4 py-2 rounded-lg shadow-lg animate-slide-in z-[10000] sm:top-8 sm:right-8">
+    You must log in to upload projects.
+  </div>
+)}
+
       <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h2
@@ -124,23 +143,36 @@ const Projects = () => {
         </div>
 
         <div className="flex justify-center mb-8">
-          <button
-            className="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-110 "
-            onClick={() => {
-              setShowUploadCard(!showUploadCard);
-              setEditingIndex(null);
-              setNewProject({
-                title: "",
-                description: "",
-                github: "",
-                linkedin: "",
-                liveLink: "",
-                username: "",
-              });
-            }}
-          >
-            +
-          </button>
+          <SignedIn>
+            <button
+              className="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-110"
+              onClick={() => {
+                setShowUploadCard(!showUploadCard);
+                setEditingIndex(null);
+                setNewProject({
+                  title: "",
+                  description: "",
+                  github: "",
+                  linkedin: "",
+                  liveLink: "",
+                  username: "",
+                });
+              }}
+            >
+              +
+            </button>
+          </SignedIn>
+          <SignedOut>
+            <button
+              className="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-500 hover:to-blue-600 transition-transform transform hover:scale-110"
+              onClick={() => {
+                setShowProgress(true); // Show progress bar
+                openSignIn(); // Open sign-in modal
+              }}
+            >
+              +
+            </button>
+          </SignedOut>
         </div>
 
         {showUploadCard && (
@@ -260,24 +292,26 @@ const Projects = () => {
               </div>
 
               <div className="flex justify-end gap-3 mt-4">
-                <button
-                  className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-1 px-3 rounded-lg hover:from-yellow-600 hover:to-orange-700 transition"
-                  onClick={() => {
-                    setEditingIndex(index);
-                    setShowUploadCard(true);
-                    setNewProject({
-                      ...project,
-                    });
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-1 px-3 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
-                  onClick={() => handleDelete(project._id)}
-                >
-                  Delete
-                </button>
+                <SignedIn>
+                  <button
+                    className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-1 px-3 rounded-lg hover:from-yellow-600 hover:to-orange-700 transition"
+                    onClick={() => {
+                      setEditingIndex(index);
+                      setShowUploadCard(true);
+                      setNewProject({
+                        ...project,
+                      });
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-1 px-3 rounded-lg hover:from-red-600 hover:to-pink-700 transition"
+                    onClick={() => handleDelete(project._id)}
+                  >
+                    Delete
+                  </button>
+                </SignedIn>
               </div>
             </motion.div>
           ))}

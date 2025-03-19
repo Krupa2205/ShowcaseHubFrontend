@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Builder from "../assets/TopBuilder.gif"; 
+import Builder from "../assets/TopBuilder.gif";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import axios from "axios";
+import { useClerk, SignedIn, SignedOut } from "@clerk/clerk-react";
+
 
 const TopBuilders = () => {
   const [builders, setBuilders] = useState([]);
@@ -14,17 +16,30 @@ const TopBuilders = () => {
     linkedin: "",
     github: "",
   });
+  const { openSignIn } = useClerk();
+  const [showProgress, setShowProgress] = useState(false); // State for progress bar
 
-  // Fetch existing builders from backend ....
+  // Fetch existing builders from backend
   useEffect(() => {
-    axios.get("http://localhost:5000/api/topbuilder")
-      .then(response => {
+    axios
+      .get("http://localhost:5000/api/profile")
+      .then((response) => {
         setBuilders(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("There was an error fetching builders:", error);
       });
   }, []);
+
+  // Show progress bar for 3 seconds
+  useEffect(() => {
+    if (showProgress) {
+      const timer = setTimeout(() => {
+        setShowProgress(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showProgress]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,27 +59,28 @@ const TopBuilders = () => {
 
   const handleAddBuilder = () => {
     if (newBuilder.name && newBuilder.description && newBuilder.image) {
-      axios.post("http://localhost:5000/api/topbuilder/add", {
-        name: newBuilder.name,
-        description: newBuilder.description,
-        linkedin: newBuilder.linkedin,
-        github: newBuilder.github,
-        profileImage: newBuilder.image,
-      })
-      .then(response => {
-        setBuilders([...builders, response.data]);
-        setNewBuilder({
-          image: "",
-          name: "",
-          description: "",
-          linkedin: "",
-          github: "",
+      axios
+        .post("http://localhost:5000/api/profile/add", {
+          name: newBuilder.name,
+          description: newBuilder.description,
+          linkedin: newBuilder.linkedin,
+          github: newBuilder.github,
+          profileImage: newBuilder.image,
+        })
+        .then((response) => {
+          setBuilders([...builders, response.data]);
+          setNewBuilder({
+            image: "",
+            name: "",
+            description: "",
+            linkedin: "",
+            github: "",
+          });
+          setShowUploadCard(false);
+        })
+        .catch((error) => {
+          alert("There was an error adding the builder:", error);
         });
-        setShowUploadCard(false);
-      })
-      .catch(error => {
-        alert("There was an error adding the builder:", error);
-      });
     } else {
       alert("Please fill in all fields.");
     }
@@ -84,13 +100,19 @@ const TopBuilders = () => {
   return (
     <section
       id="top-builders"
-      className="py-12 relative bg-gradient-to-r from-pink-300 via-blue-200 to-pink-400 animate-gradient-wave bg-[length:200%_200%]"
+      className="py-12 sticky bg-gradient-to-r from-pink-300 via-blue-200 to-pink-400 animate-gradient-wave bg-[length:200%_200%]"
     >
+      {/* Progress Bar */}
+      {showProgress && (
+  <div className="fixed top-4 right-4 bg-white border border-green-500 text-black px-4 py-2 rounded-lg shadow-lg animate-slide-in z-[10000] sm:top-8 sm:right-8">
+    You must log in to upload projects.
+  </div>
+)}
+
       <h2
         className="text-4xl font-extrabold text-gray-800 tracking-wide text-center mb-8"
         style={{ fontFamily: "Kanit, sans-serif" }}
       >
-        {/* Top Builders 🏆 */}
         Your Profiles🏆
       </h2>
 
@@ -137,19 +159,39 @@ const TopBuilders = () => {
             </div>
           </motion.div>
         ))}
-        <motion.button
-          className="w-36 h-12 text-black rounded-md flex items-center justify-center text-base shadow-md font-bold"
-          onClick={() => setShowUploadCard(!showUploadCard)}
-          whileHover={{ scale: 1.1 }}
-          style={{
-            background:
-              "linear-gradient(45deg, #81BFDA, #FEEE91, #2196f3, #FEEE91)",
-            backgroundSize: "300% 300%",
-            animation: "gradientAnimation 6s ease infinite",
-          }}
-        >
-          + Add your Profile
-        </motion.button>
+        <SignedIn>
+          <motion.button
+            className="w-36 h-12 text-black rounded-md flex items-center justify-center text-base shadow-md font-bold"
+            onClick={() => setShowUploadCard(!showUploadCard)}
+            whileHover={{ scale: 1.1 }}
+            style={{
+              background:
+                "linear-gradient(45deg, #81BFDA, #FEEE91, #2196f3, #FEEE91)",
+              backgroundSize: "300% 300%",
+              animation: "gradientAnimation 6s ease infinite",
+            }}
+          >
+            + Add your Profile
+          </motion.button>
+        </SignedIn>
+        <SignedOut>
+          <motion.button
+            className="w-36 h-12 text-black rounded-md flex items-center justify-center text-base shadow-md font-bold"
+            onClick={() => {
+              setShowProgress(true); // Show progress bar
+              openSignIn(); // Open sign-in modal
+            }}
+            whileHover={{ scale: 1.1 }}
+            style={{
+              background:
+                "linear-gradient(45deg, #81BFDA, #FEEE91, #2196f3, #FEEE91)",
+              backgroundSize: "300% 300%",
+              animation: "gradientAnimation 6s ease infinite",
+            }}
+          >
+            + Add your Profile
+          </motion.button>
+        </SignedOut>
       </div>
 
       <AnimatePresence>
@@ -173,12 +215,12 @@ const TopBuilders = () => {
                 className="w-32 h-32 object-cover rounded-full mb-6"
               />
               <h3 className="text-xl font-bold text-gray-800 mb-4">
-                Add New Builder
+                Add Your Profile
               </h3>
               <input
                 type="text"
                 name="name"
-                placeholder="Builder Name"
+                placeholder="Your Name"
                 value={newBuilder.name}
                 onChange={handleInputChange}
                 className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"

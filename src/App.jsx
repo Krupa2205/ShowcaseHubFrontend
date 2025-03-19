@@ -7,6 +7,9 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
 import Feedback from './components/Feedback';
+import Navbar from './components/Navbar';
+import "./index.css";
+
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;  
 
@@ -19,6 +22,8 @@ function App() {
             path="/" 
             element={
               <>
+                
+                <Navbar />
                 <Header />
                 <About />
                 <Projects />
